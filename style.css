@@ -1,0 +1,143 @@
+/* Couleurs EPSP (mêmes teintes que le livret papier) */
+:root {
+  --bleu: #5b9bd5; --rose: #f4a6cc; --orange: #f4b183; --vert: #70ad47; --gris: #bfbfbf;
+  --texte: #1a1a1a; --fond: #f5f6f8; --carte: #ffffff; --accent: #1f4e79; --erreur: #b00020; --ok: #2e7d32;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 18px;
+  color: var(--texte); background: var(--fond); -webkit-tap-highlight-color: transparent; }
+main { max-width: 900px; margin: 0 auto; padding: 16px; }
+h1 { font-size: 26px; color: var(--accent); margin: 8px 0 16px; }
+h2 { font-size: 21px; color: var(--accent); margin: 24px 0 8px; }
+button { font: inherit; cursor: pointer; }
+.gros { display: block; width: 100%; min-height: 64px; margin: 10px 0; padding: 12px 16px; font-size: 21px;
+  border: 2px solid var(--accent); border-radius: 12px; background: var(--carte); color: var(--accent); text-align: left; }
+.gros.principal { background: var(--accent); color: #fff; text-align: center; }
+.gros:active { transform: scale(0.98); }
+.petit { min-height: 48px; padding: 8px 16px; border: 2px solid var(--accent); border-radius: 10px; background: var(--carte); color: var(--accent); }
+.barre { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.qui { font-size: 16px; color: #555; }
+.alerte { position: sticky; top: 0; z-index: 10; padding: 14px 16px; background: var(--erreur); color: #fff; font-size: 18px; }
+.alerte.ok { background: var(--ok); }
+.carte { background: var(--carte); border-radius: 12px; padding: 14px; margin: 12px 0; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.carte.manque { outline: 4px solid var(--erreur); }
+
+/* Clavier du code PIN : grosses touches, utilisables avec des gants */
+.pin-points { font-size: 40px; letter-spacing: 16px; text-align: center; min-height: 56px; }
+.clavier { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 380px; margin: 0 auto; }
+.clavier button { min-height: 80px; font-size: 32px; border-radius: 14px; border: 2px solid var(--accent); background: var(--carte); }
+
+/* Pastilles */
+.ligne-avis { display: flex; align-items: center; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+.ligne-avis .etiquette { width: 92px; font-weight: 600; font-size: 16px; }
+.pastilles { display: flex; gap: 8px; flex-wrap: wrap; }
+.pastille { width: 76px; min-height: 76px; border-radius: 14px; border: 3px solid transparent; padding: 4px;
+  font-size: 12px; line-height: 1.15; color: #1a1a1a; display: flex; align-items: flex-end; justify-content: center; text-align: center; }
+.pastille[data-v="bleu"] { background: var(--bleu); }
+.pastille[data-v="rose"] { background: var(--rose); }
+.pastille[data-v="orange"] { background: var(--orange); }
+.pastille[data-v="vert"] { background: var(--vert); }
+.pastille[data-v="nc"] { background: #eee; border-color: var(--gris); }
+.pastille.choisie { border-color: #000; box-shadow: 0 0 0 3px #fff inset; font-weight: 700; }
+.pastille:not(.choisie).attenuee { opacity: .35; }
+.pastille:disabled { cursor: not-allowed; }
+.code { font-weight: 700; color: var(--accent); margin-right: 6px; }
+.note-permis { font-size: 15px; color: #6b4e00; margin-top: 4px; }
+
+textarea { width: 100%; min-height: 110px; font: inherit; padding: 10px; border-radius: 10px; border: 2px solid #999; }
+.signature { width: 100%; height: 180px; background: #fff; border: 2px dashed #888; border-radius: 10px; touch-action: none; display: block; }
+.liste-fiche { font-size: 17px; }
+button.liste-fiche { display: block; width: 100%; text-align: left; border: 0; color: inherit; }
+/* Tableau d'ensemble : une ligne par guide sur la page du salarié (étape 8a) */
+.ligne-guide { display: flex; gap: 10px; align-items: baseline; width: 100%; text-align: left; padding: 10px 4px;
+  border: 0; border-bottom: 1px solid #ddd; background: none; color: inherit; font-size: 17px; }
+.ligne-guide:last-child { border-bottom: 0; }
+.ligne-guide .code { min-width: 3.2em; }
+.ligne-guide .titre-guide { flex: 1; }
+.ligne-guide .etat-guide { white-space: nowrap; font-weight: 600; }
+.ligne-guide.a-faire .etat-guide { color: #666; font-weight: 400; font-style: italic; }
+.ligne-lecture { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.avis-lecture { border-radius: 10px; padding: 6px 10px; border: 2px solid #000; font-size: 16px; }
+.avis-lecture[data-v="bleu"] { background: var(--bleu); }
+.avis-lecture[data-v="rose"] { background: var(--rose); }
+.avis-lecture[data-v="orange"] { background: var(--orange); }
+.avis-lecture[data-v="vert"] { background: var(--vert); }
+.avis-lecture[data-v="nc"] { background: #eee; }
+.texte-lecture { white-space: pre-wrap; margin-top: 6px; }
+/* Étape 8b : couleur donnée la fois précédente, à droite de la ligne de l'encadrant */
+.precedent { margin-left: auto; text-align: right; font-size: 14px; }
+.precedent .avis-lecture { font-size: 14px; padding: 3px 8px; display: inline-block; }
+
+/* Installation de l'appareil */
+label { display: block; margin: 14px 0 4px; font-weight: 600; }
+.bloc-champ { display: block; }
+.case { display: flex; align-items: center; gap: 10px; font-size: 19px; min-height: 48px; }
+.case input { width: 28px; height: 28px; }
+.champ { display: block; width: 100%; min-height: 56px; font-size: 20px; padding: 8px 12px; border: 2px solid #999; border-radius: 10px; margin-top: 6px; }
+
+/* Documents des guides et aide (étape 4 bis) */
+.page-document { display: block; margin: 10px 0; box-shadow: 0 1px 4px rgba(0,0,0,.25); background: #fff; }
+.titre-document { font-size: 18px; margin: 18px 0 4px; }
+.barre .petit + .petit { margin-left: 6px; }
+/* Étape 9b : bilans à venir */
+.bilans-proches { border: 2px solid #c25e00; background: #fff4e5; }
+.bilans-proches h2 { margin: 0 0 6px; color: #8a4200; }
+.ligne-bilan { padding: 10px 4px; border-bottom: 1px solid #f0d2ad; background: none; font-size: 17px; }
+.ligne-bilan:last-child { border-bottom: 0; }
+.prochain-bilan { color: #444; }
+.bilan-proche .prochain-bilan, .prochain-bilan.bilan-proche { color: #8a4200; font-weight: 600; }
+.carte.bilan-proche { border-left: 6px solid #c25e00; }
+/* Étape 10a : bilan */
+.regle-comportements { font-weight: 600; }
+.regle-comportements[data-acquis="1"] { border-left: 6px solid #2e7d32; }
+.regle-comportements[data-acquis="0"] { border-left: 6px solid #c25e00; }
+.pas-evalue { color: #8a4200; font-style: italic; }
+/* Étape 10b : bilan en retard (D207) */
+.bilan-retard, .bilan-retard .prochain-bilan, .prochain-bilan.bilan-retard { color: #b00020 !important; font-weight: 700; }
+.carte.bilan-retard { border-left: 6px solid #b00020; }
+/* D211 : texte de la licence dans l'application */
+.texte-licence { white-space: pre-wrap; font-size: 14px; background: #fff; padding: 12px; border-radius: 8px; }
+/* Étape 11 : livret à imprimer (D212 à D214) */
+.livret { background: #fff; color: #000; padding: 8px; }
+.livret h1 { font-size: 20px; }
+.livret-partie { margin-top: 18px; break-before: page; }
+.livret-tableau { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 12px; break-inside: auto; }
+.livret-tableau th, .livret-tableau td { border: 1px solid #888; padding: 3px 4px; vertical-align: top; }
+.livret-tableau th.livret-col { width: 11%; white-space: pre-line; font-weight: 600; }
+.livret-domaine { background: #eee; font-weight: 600; }
+.livret-tableau tr { break-inside: avoid; }
+.livret-case { text-align: center; font-weight: 600; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.livret-case[data-v="bleu"] { background: #5b9bd5; } .livret-case[data-v="rose"] { background: #f4a6c8; }
+.livret-case[data-v="orange"] { background: #f4b183; } .livret-case[data-v="vert"] { background: #70ad47; }
+.livret-case[data-v="nc"] { background: #ddd; }
+.livret-legende .livret-case { display: inline-block; padding: 2px 6px; margin: 0 4px; border: 1px solid #888; }
+@media print {
+  .pas-imprime, #alerte, .etat-echange { display: none !important; }
+  body { background: #fff; }
+  @page { margin: 10mm; }
+}
+/* Étape 10c : objectifs et fiche d'entretien */
+.statuts { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.statuts .choisi { background: #1f4e79; color: #fff; }
+.pistes div { margin-top: 6px; font-size: 15px; }
+.fiche-entretien .livret-tableau td { height: 22px; }
+.lignes-vides { white-space: pre-line; color: #999; }
+/* Étape 10d : graphiques d'évolution */
+.graphique { overflow-x: auto; margin: 6px 0; }
+.graphique svg { max-width: 100%; height: auto; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.legende-graphique span { display: inline-flex; align-items: center; gap: 4px; margin-right: 12px; font-size: 14px; }
+.legende-graphique i { display: inline-block; width: 14px; height: 14px; border: 1px solid #888; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+/* Étape 15 : recherche (D259), fiches imprimées (D260) */
+.recherche { margin: 8px 0 12px; }
+[hidden] { display: none !important; }
+.recherche input { width: 100%; font-size: 20px; padding: 10px; box-sizing: border-box; }
+.fiche-imprimee + .fiche-imprimee { break-before: page; margin-top: 24px; }
+.fiche-imprimee .livret-case { font-weight: 400; font-size: 11px; }
+.fiche-imprimee .livret-case[data-v=""] { background: none; }
+/* Étape 16 : avis du salarié recopié au bilan (D267) */
+.avis-salarie { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.avis-salarie-bouton { min-height: 48px; padding: 4px 8px; border-radius: 10px; border: 2px solid #888; background: #fff; font-size: 15px; }
+.avis-salarie-bouton.choisi { border-color: #1f4e79; border-width: 4px; font-weight: 700; }
+.avis-salarie-bouton[data-v="bleu"].choisi { background: var(--bleu); } .avis-salarie-bouton[data-v="rose"].choisi { background: var(--rose); }
+.avis-salarie-bouton[data-v="orange"].choisi { background: var(--orange); } .avis-salarie-bouton[data-v="vert"].choisi { background: var(--vert); }
+.avis-salarie-asp { margin-top: 6px; }
